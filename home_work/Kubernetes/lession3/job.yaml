@@ -1,0 +1,24 @@
+# k apply -f job.yaml
+# k get job
+# k get pod
+# k exec -it <pod-name> -- /bin/sh
+# k delete -f job.yaml
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  parallelism: 2  # Số Pod được chạy đồng thời (concurrently).
+  completions: 2   # Tổng số Pod cần hoàn thành thành công trước khi Job được coi là hoàn thành.
+  backoffLimit: 1  # Số lần thử chạy lại Job sau khi nó thất bại.
+
+  template:
+    metadata:
+      name: my-pod
+    spec:
+      containers:
+        - name: pi
+          image: perl
+          command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never # hoặc OnFailure

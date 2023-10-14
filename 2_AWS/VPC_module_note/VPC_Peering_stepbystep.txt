@@ -1,0 +1,30 @@
+#step 1
+1 VPC A
+1 VPC B
+
+### Note
+may ban co the dung AWS "CloudFormation" de tao VPC tu file yaml (vpc.yaml)
+-update lai thong tin tranh trung nhau khi trien khai nhu VPC name, CIDR, subnetID
+-Vao lai AWS CloudFormation de delete sau khi hoan tat!
+
+#### end note
+
+#step 2
+Create VPC Peering
++ Input ID VPC A&B
++ Accept B or A
+
+#update Route Table
+VPC A (10.0.0.0/16): di qua dc RouteTable B  10.0.0.0/16  -> 10.1.0.0/16
+VPC B (10.1.0.0/16): di qua dc RouteTable A  10.1.0.0/16  -> 10.0.0.0/16 
+
+#update Security Group
+
+VPC A: di qua dc SG B
++EC2-Public-Subnet:
+10.0.1.186
+-->sg-00e2aaa9465fd6865  allow 10.1.0.0/16
+
+VPC B: di qua dc SG A
+10.1.11.108
+-->sg-03835763cbffdde90 allow 10.0.0.0/16

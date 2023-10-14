@@ -1,0 +1,6 @@
+version: '3'
+  services:
+    nodejs:
+      image: thuong99/my-nodejs-image:latest
+      ports:
+        - '8080:8080'

@@ -1,0 +1,1 @@
+Docker Swarm là một công cụ quản lý và triển khai ứng dụng dựa trên containers trong môi trường có nhiều máy chủ (multi-host). Docker Swarm cho phép bạn tạo ra một cluster của các máy chủ Docker, gọi là "nodes," và quản lý chúng như một đơn vị đồng nhất.

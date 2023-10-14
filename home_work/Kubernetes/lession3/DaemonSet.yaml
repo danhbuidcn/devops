@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: to-monitor
+spec:
+  selector:
+    matchLabels:
+      app: to-monitor
+  template:
+    metadata:
+      name: myapp
+      labels:
+        app: to-monitor
+    spec:
+      nodeSelector:
+        disk: ssd
+      containers:
+        - name: myapp
+          image: thuong99/nginx_draft
+          ports:
+            - containerPort: 80

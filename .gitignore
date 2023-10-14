@@ -1,0 +1,3 @@
+.env
+home_work/CICD/terraform/variable.tf
+home_work/CICD/terraform/.terraform/**

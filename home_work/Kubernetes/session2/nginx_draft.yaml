@@ -1,0 +1,37 @@
+# Create 2 pod with 1 container and label each pod
+# exec container 1 and call to caontainer 2 
+# k exec -it pod/nginx-testing -c nginx -- sh
+# call to container 2 -> wget [ip from (1)]:80
+
+# get pod 2 information -> k describe pod nginx-production
+# get ip (1)
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-testing
+  labels:
+    environment: testing # label 
+spec:
+  containers:
+    - image: thuong99/nginx_draft
+      name: nginx
+      ports:
+        - containerPort: 80
+          protocol: TCP
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-production
+  labels:
+    environment: production # label 
+spec:
+  containers:
+    - image: thuong99/nginx_draft
+      name: nginx
+      ports:
+        - containerPort: 80
+          protocol: TCP

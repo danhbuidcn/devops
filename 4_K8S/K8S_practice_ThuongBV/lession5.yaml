@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: name-stateful-set
+spec:
+  serviceName: name-service
+  replicas: 2
+  selector:
+    matchLabels:
+      app: stateful-set
+  template:
+    metadata:
+      labels:
+        app: stateful-set
+    spec:
+      containers:
+        - name: name-container
+          image: thuong99/nginx_draft
+          ports:
+            - name: http
+              containerPort: 80
+
+# 5.Create a nginx app with StatefulSet then list pod to see the differences
+# k apply -f lession5.yaml
+# k get pods
+# các pod được đánh index từ 0
+# k delete -f lession5.yaml

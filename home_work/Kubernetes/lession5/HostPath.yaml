@@ -1,0 +1,32 @@
+# thư mục ngoài host được gán vào container
+# k apply -f HostPath.yaml
+# k get pod
+# k port-forward fortune 4040:80
+# curl http://localhost:4040
+# k exec -it hostpath-volume -- sh
+# > cd /var/log/nginx 
+
+# docker exec -it container_id bash  //exec into container of kind
+# > cd /var/log // thêm file vào đây thì /var/log/nginx trong pod cũng thay đổi
+
+# k delete -f HostPath.yaml
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-volume
+spec:
+  containers:
+    - image: ddthuong/nginx
+      name: web-server
+      volumeMounts:
+        - name: log # log volume
+          mountPath: /var/log/nginx # mounted at /var/log/nginx in the container
+      ports:
+        - containerPort: 80
+          protocol: TCP
+  volumes:
+    - name: log
+      hostPath: # hostPath volume
+        path: /var/log # folder of worker node tương ứng với /var/log/nginx trong container

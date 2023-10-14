@@ -1,0 +1,29 @@
+apiVersion: apps/v1 
+kind: ReplicaSet 
+metadata:
+  name: training
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: training
+  template:
+    metadata:
+      labels:
+        app: training
+    spec:
+      nodeSelector:
+        type: worker2  # kubectl get nodes --show-labels để lấy label
+      containers:
+        - image: thuong99/nginx_draft
+          name: training
+          ports:
+            - containerPort: 80
+
+# 2.Create a nginx app with Replica Set
+# k apply -f lession2.yaml
+# k get rs
+# k get pods --all-namespaces -o wide --field-selector spec.nodeName=kind-worker2
+# k delete pod pod_name
+# k get pod
+# k delete -f lession2.yaml

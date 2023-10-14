@@ -1,0 +1,25 @@
+# 3. Create a nginx app with a Daemon set (required at least 2 workers)
+
+# B2
+# Create ReplicaSet
+# k apply -f lession3_v2_node.yaml
+# k get pods --all-namespaces -o wide --field-selector spec.nodeName=kind-worker2
+# k delete -f lession3_v2_node.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset1
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      nodeSelector:
+        type: worker2 # gasn label cho node, Chỉ định Node cụ thể bằng label
+      containers:
+      - name: my-container
+        image: thuong99/nginx_draft

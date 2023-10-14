@@ -1,0 +1,12 @@
+# Create pod with one container
+apiVersion: v1 # Descriptor conforms to version v1 of Kubernetes API
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+    - name: myapp
+      image: thuong99/nginx_draft
+      ports:
+        - containerPort: 80 # The port the app is listening on 
+          protocol: TCP

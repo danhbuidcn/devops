@@ -1,0 +1,14 @@
+# 3. Create a nginx app with a Daemon set (required at least 2 workers)
+
+# B1
+# kind create cluster --config lession3_v2_cluster.yaml
+# kind get nodes
+# kubectl get nodes --show-labels
+# k label nodes <node-name> <label-key>=<label-value>
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker

@@ -1,0 +1,6 @@
+Noi dung 31/08:
+1) Nam duoc khai niem VPC va cac components: VPC, SG, IGW, NGW,VPC Peering, Route Table...
+
+2) RUN lab: chay tay, chay file yaml tren CLoudformation
+
+3) Lam sao subnet ra duoc internet, custome ACL, Security Group(SG)

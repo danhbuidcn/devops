@@ -1,0 +1,21 @@
+# Create replicaSet with 2 pods
+# Delete one pod and check total pod
+apiVersion: apps/v1 # change version API
+kind: ReplicaSet # change resource name
+metadata:
+  name: training
+spec:
+  replicas: 2
+  selector:
+    matchLabels: # change here 
+      app: training
+  template:
+    metadata:
+      labels:
+        app: training
+    spec:
+      containers:
+        - image: thuong99/nginx_draft
+          name: training
+          ports:
+            - containerPort: 80

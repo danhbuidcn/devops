@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: thuong99/nginx_draft
+
+# 3. Create a nginx app with a Daemon set (required at least 2 workers)
+# k apply -f lession3.yaml
+# k get ds
+# k delete -f lession3.yaml

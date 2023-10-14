@@ -1,0 +1,33 @@
+# thư mục trống được gán và node
+# kubectl apply -f EmptyDir.yaml
+# kubectl get pod - o wide
+# kubectl exec -it fortune -- sh
+# kubectl port-forward fortune 8080:80
+# curl http://localhost:8080
+# kubectl describe pod fortune
+# kubectl delete -f EmptyDir.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fortune
+spec:
+  containers:
+    - name: html-generator
+      image: luksa/fortune
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do echo hello; sleep 10;done"]
+      volumeMounts:
+        - name: html # The volume called html is mounted at /var/htdocs in the container
+          mountPath: /var/htdocs # thư mục được gán với EmptyDir
+    - name: web-server
+      image: nginx:alpine
+      ports:
+        - containerPort: 80
+          protocol: TCP
+      volumeMounts:
+        - name: html # The volume called html is mounted at /usr/share/nginx/html in the container
+          mountPath: /usr/share/nginx/html
+          readOnly: true
+  volumes: # define volumes
+    - name: html # name of the volumes
+      emptyDir: {} # define type is emptyDir

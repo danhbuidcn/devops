@@ -1,0 +1,52 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nginx-deployment
+# spec:
+#   replicas: 3
+#   selector:
+#     matchLabels:
+#       app: nginx
+#   template:
+#     metadata:
+#       labels:
+#         app: nginx
+#     spec:
+#       containers:
+#       - name: nginx-container
+#         image: thuong99/nginx_draft 
+
+
+# 4.Create a nginx app with Deployment, then update a new version with it
+# -> thay đổi image tag thay vì image mới
+
+# k apply -f lession4.yaml
+# k get deployment
+# k get pods
+# k port-forward pod/nginx-deployment-7d99ff8bd6-7qw5r 8080:80
+# curl localhost:8080
+
+# edit the lession4.yaml as follows
+# k apply -f lession4.yaml
+# k port-forward pod/nginx-deployment-6fd5fb9566-fw5bc 8080:80
+# curl localhost:8080
+# k delete -f lession4.yaml
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx
