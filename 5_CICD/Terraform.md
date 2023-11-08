@@ -1,8 +1,7 @@
 # Overview
 - Terraform là một công cụ IaC, dùng để quản lý và triển khai hạ tầng máy chủ, mạng, lưu trữ và các tài nguyên khác trong môi trường đám mây.
-Action:
 
-initial insfrastructure setup => manage infrastructure => initial application setup
+initial insfrastructure setup => manage infrastructure => initial application setup => ~~Manage Applications~~
 
 ---
 
@@ -49,8 +48,47 @@ initial insfrastructure setup => manage infrastructure => initial application se
 
 - remote state: quản lý vesion giống git.
 
-- data source: truy cập thông tin về các tài nguyên tồn tại trong cloud mà bạn không quản lý.
+- data source: truy cập thông tin về các tài nguyên tồn tại trong cloud mà bạn không quản lý. Dùng để cung cấp thông tin cho resource hoặc module khác
 
-- resource: thể hiện một tài nguyên cụ thể trong hạ tầng.
+- resource: thể hiện một tài nguyên cụ thể trong hạ tầng như máy chủ ảo, mạng .v.v.
 
 - template: một file hoặc chuỗi văn bản chứa mã terraform, sử dụng để tạo hoặc tùy chỉnh các tài nguyên.
+
+---
+Nếu bạn đã tạo sẵn một VPC với một subnet trên cloud và muốn sử dụng Terraform để tạo thêm hai subnet khác trong VPC đó, bạn cần sử dụng Terraform để quản lý các subnet mới bằng cách thêm chúng vào tệp cấu hình Terraform của bạn. Dưới đây là ví dụ về cách thêm hai subnet mới vào một VPC đã tồn tại trong Terraform :
+
+
+
+```
+# Khai báo provider (AWS)
+provider "aws" {
+  region = "us-east-1" # Thay thế vùng theo nhu cầu của bạn
+}
+
+# Khai báo ID của VPC đã tồn tại (thay thế "vpc-12345678" bằng ID thực tế của VPC)
+data "aws_vpc" "existing_vpc" {
+  id = "vpc-12345678" # ID của VPC đã tồn tại
+}
+
+# Tạo Subnet 1
+resource "aws_subnet" "subnet1" {
+  vpc_id                  = data.aws_vpc.existing_vpc.id
+  cidr_block              = "10.0.3.0/24" # Điều chỉnh dải IP CIDR cho Subnet 1
+  availability_zone       = "us-east-1a" # Thay thế khu vực AZ theo nhu cầu của bạn
+
+  tags = {
+    Name = "subnet-1"
+  }
+}
+
+# Tạo Subnet 2
+resource "aws_subnet" "subnet2" {
+  vpc_id                  = data.aws_vpc.existing_vpc.id
+  cidr_block              = "10.0.4.0/24" # Điều chỉnh dải IP CIDR cho Subnet 2
+  availability_zone       = "us-east-1b" # Thay thế khu vực AZ theo nhu cầu của bạn
+
+  tags = {
+    Name = "subnet-2"
+  }
+}
+```
