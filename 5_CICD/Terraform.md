@@ -44,6 +44,14 @@ initial insfrastructure setup => manage infrastructure => initial application se
 
 - terrform destroy: tìm đển file .tfstate để tìm các resource đang có và xóa hết các resource.
 
+- Có 2 cách để cung cấp phần mềm trên instance :
+  ▪ Xây dựng AMI tùy chỉnh của riêng mình và kết hợp phần mềm của bạn với hình ảnh
+    ✔ Packer là một công cụ tuyệt vời để thực hiện việc này
+  ▪ Một cách khác để khởi động các AMI được tiêu chuẩn hóa và sau đó cài đặt phần mềm bạn cần vào đó
+    ✔ Sử dụng file uploads
+    ✔ Sử dụng các công cụ tự động hóa như chef, puppet,  ansible
+    ✔ Sử dụng remote exec
+
 ---
 
 - remote state: quản lý vesion giống git.

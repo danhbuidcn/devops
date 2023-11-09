@@ -1,0 +1,10 @@
+---
+- name: Deploy Nginx on EC2 Instances
+  hosts: your_ec2_group_name  # tên của nhóm EC2 instances trong tệp inventory.ini
+  become: yes
+
+  roles:
+    - name: nginxinc.nginx
+      vars:
+        nginx_listen_port: 80
+        nginx_server_name: "{{ inventory_hostname }}"
