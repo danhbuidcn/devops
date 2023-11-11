@@ -1,24 +1,21 @@
+# chứa danh sách các nhiệm vụ mà role sẽ thực hiện
 ---
-- name: Update APT cache
-  apt:
+- name: Update yum cache
+  yum:
     update_cache: true
 
-- name: Install Nginx
-  apt:
-    name: nginx
-    state: present
+- name: Install Nginx # mô tả hành động
+  yum: #  Module để cài đặt pakage trên linux distribution
+    name: nginx # tên gói cần cài đặt
+    state: present # thông báo cho ansible rằng gói này phải có mặt trên hệ thống nếu có rồi nó sẽ bỏ qua task này
+    update_cache: true # cập nhật thông tin về các gói, tưong tự apt-get update
 
 - name: Copy index file to remote hosts
-  ansible.builtin.copy:
-    src: ../files/ansible-index.html
-    dest: /var/www/html/ansible-index.html
-
-- name: Copy Nginx configuration file to remote hosts
-  ansible.builtin.copy:
-    src: ../templates/nginx.conf.j2
-    dest: /etc/nginx/nginx.conf
+  ansible.builtin.copy: # builtin module của ansible, để sao chép từ local lên remote host
+    src: ../files/index.html
+    dest: /usr/share/nginx/html/index.html
 
 - name: Make sure a service unit is running
-  ansible.builtin.systemd_service:
+  ansible.builtin.systemd_service: # quản lý các dịch vụ systemd trên linux
     state: started
     name: nginx

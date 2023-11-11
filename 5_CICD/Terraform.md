@@ -65,8 +65,6 @@ initial insfrastructure setup => manage infrastructure => initial application se
 ---
 Nếu bạn đã tạo sẵn một VPC với một subnet trên cloud và muốn sử dụng Terraform để tạo thêm hai subnet khác trong VPC đó, bạn cần sử dụng Terraform để quản lý các subnet mới bằng cách thêm chúng vào tệp cấu hình Terraform của bạn. Dưới đây là ví dụ về cách thêm hai subnet mới vào một VPC đã tồn tại trong Terraform :
 
-
-
 ```
 # Khai báo provider (AWS)
 provider "aws" {

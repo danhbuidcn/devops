@@ -11,3 +11,7 @@ $ terraform apply > thực hiện các thay đổi
 $ terraform output > hiển thị thông tin resource
 
 $ terraform destroy > xóa các resource được khai báo trong tfstate
+
+
+---
+Tạo module truyền các biến vào thay vì hardcode

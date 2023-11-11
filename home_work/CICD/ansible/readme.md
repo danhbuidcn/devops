@@ -11,10 +11,10 @@ $ ssh -i "id_rsa_ansible.pem" ec2-user@ec2_public_ip // test connect
 - Chạy playbook
 
 ```
+$ ansible -i inventory.ini -m ping remote_hosts // ansible -i ping all: ping tới tất cả các host mà ansible sẽ connect
 $ ansible-galaxy install nginxinc.nginx // cài đặt role từ ansible galaxy
 
 $ ansible-playbook -i inventory.ini deploy_nginx.yml
-$ ansible -i inventory.ini -m ping your_ec2_group_name // all: ping tới tất cả các host mà ansible sẽ connect
 ```
 => kết quả: chỉ có instance 1 hoạt động, instance 2 setup thất bại
 
@@ -24,6 +24,20 @@ $ ansible -i inventory.ini -m ping your_ec2_group_name // all: ping tới tất 
 - Chuẩn Bị EC2 Instances: như ở mục default_nginx
 - Chạy playbook
 ```
+$ ansible -i inventory/hosts.ini -m ping remote_hosts // ping tới tất cả các host trước khi chạy playbook
 $ ansible-playbook -i inventory/hosts.ini install_nginx.yml
 ```
 
+# Practice
+- Run EC2 cài đặt key pair
+- Install nginx trên 1 remote host
+    + sudo yum update
+    + sudo yum install nginx
+    + nginx -v 
+    + sudo systemctl start nginx.service // check ec2
+    + cd /etc/nginx // to custom nginx
+    + cat nginx.conf // tìm `root: /usr/share/nginx/html;`
+    + cd /usr/share/nginx/html // thay đổi nội dung của file index.html
+    + sudo yum remove nginx
+- Demo với 1 remote host bằng ansible
+- Thực hiện với group host

@@ -152,3 +152,10 @@ ansible-project/
     + `templates/`: chứa các mẫu (templates) cho các tệp cấu hình.
     + `tests/`: nơi để chứa các tệp và script kiểm thử.
     + `vars/main.yml`: chứa các biến được sử dụng trong role.
+
+
+---
+Các hướng xử lý khi practive với ansible
+- Lên kế hoạch. có bao nhiêu resource, cần làm gì trên mỗi resource. 
+- Thực hiện test với 1 remote host trước khi set up với group host
+- Triển khai trên hệ thống gồm nhiều group host
