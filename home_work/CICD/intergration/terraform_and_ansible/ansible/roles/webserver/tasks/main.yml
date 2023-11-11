@@ -1,0 +1,27 @@
+# chứa danh sách các nhiệm vụ mà role sẽ thực hiện
+---
+- name: Update yum cache
+  yum:
+    update_cache: true
+
+- name: Install amazon-linux-extras package
+  yum: #  Module để cài đặt pakage amazon_linux_extras
+    name: amazon-linux-extras
+    state: present
+    update_cache: true
+
+- name: Install Nginx # mô tả hành động
+  yum: #  Module để cài đặt pakage trên linux distribution
+    name: nginx # tên gói cần cài đặt
+    state: present # thông báo cho ansible rằng gói này phải có mặt trên hệ thống nếu có rồi nó sẽ bỏ qua task này
+    update_cache: true # cập nhật thông tin về các gói, tưong tự apt-get update
+
+- name: Copy index file to remote hosts
+  ansible.builtin.copy: # builtin module của ansible, để sao chép từ local lên remote host
+    src: ../files/index.html
+    dest: /usr/share/nginx/html/index.html
+
+- name: Make sure a service unit is running
+  ansible.builtin.systemd_service: # quản lý các dịch vụ systemd trên linux
+    state: started
+    name: nginx
